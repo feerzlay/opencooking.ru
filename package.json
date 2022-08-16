@@ -1,0 +1,19 @@
+{
+  "name": "basecooking",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feerzlay/basecooking.git"
+  },
+  "author": "Denis Yakshov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feerzlay/basecooking/issues"
+  },
+  "homepage": "https://github.com/feerzlay/basecooking#readme"
+}
