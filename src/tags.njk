@@ -1,0 +1,13 @@
+---
+pagination:
+  data: collections.tags
+  size: 1
+  alias: tag
+  addAllPagesToCollections: true
+permalink: /tags/{{ tag | slugify }}/
+---
+
+<h1>{{ tag }}</h1>
+
+{% set recipes = collections[tag] | sort %}
+{% include "list.njk" %}

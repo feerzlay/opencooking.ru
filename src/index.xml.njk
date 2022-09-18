@@ -1,0 +1,52 @@
+---
+permalink: "{{ metadata.feed.path }}"
+eleventyExcludeFromCollections: true
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>{{ metadata.title }}</title>
+	<subtitle>{{ metadata.description }}</subtitle>
+	{% set absoluteUrl %}{{ metadata.feed.path | url | absoluteUrl(metadata.url) }}{% endset %}
+	<link href="{{ absoluteUrl }}" rel="self"/>
+	<link href="{{ metadata.url }}"/>
+	<updated>{{ collections.recipes | rssLastUpdatedDate }}</updated>
+	<id>{{ metadata.feed.id }}</id>
+	{%- for recipe in collections.recipes | reverse %}
+		{% set absoluteRecipeUrl %}{{ recipe.url | url | absoluteUrl(metadata.url) }}{% endset %}
+		<entry>
+			<id>{{ absoluteRecipeUrl }}</id>
+			<title>{{ recipe.data.title }}</title>
+			<summary>{{ recipe.data.description }}</summary>
+			<link href="{{ absoluteRecipeUrl }}"/>
+			<updated>{{ recipe.date | rssDate }}</updated>
+			<content type="html">
+				&lt;ul&gt;
+					&lt;li&gt;
+						Время подготовки — {{ recipe.data.prepTime | duration }}
+					&lt;/li&gt;
+					&lt;li&gt;
+						Время приготовления — {{ recipe.data.cookTime | duration }}
+					&lt;/li&gt;
+					{% if recipe.data.servings %}
+						&lt;li&gt;
+							Количество порций — {{ recipe.data.servings }}
+						&lt;/li&gt;
+					{% endif %}
+				&lt;/ul&gt;
+
+				&lt;h2&gt;Ингредиенты&lt;/h2&gt;
+
+				&lt;ul&gt;
+					{% for ingredient in recipe.data.ingredients %}
+						&lt;li&gt;{{ ingredient.title }} — {{ ingredient.value }}&lt;/li&gt;
+					{% endfor %}
+				&lt;/ul&gt;
+
+				&lt;h2&gt;Приготовление&lt;/h2&gt;
+
+				{{ recipe.templateContent | htmlToAbsoluteUrls(absoluteRecipeUrl) }}
+			</content>
+		</entry>
+	{%- endfor %}
+</feed>

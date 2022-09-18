@@ -1,0 +1,7 @@
+<ul>
+  {% for recipe in recipes %}
+    <li>
+      <a href="{{ recipe.url | url }}">{{ recipe.data.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

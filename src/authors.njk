@@ -1,0 +1,13 @@
+---
+pagination:
+  data: collections.authors
+  size: 1
+  alias: author
+  addAllPagesToCollections: true
+permalink: /authors/{{ author | slugify }}/
+---
+
+<h1>Рецепты от {{ author }}</h1>
+
+{% set recipes = collections.authorsRecipes[author] | sort %}
+{% include "list.njk" %}

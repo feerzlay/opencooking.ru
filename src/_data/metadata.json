@@ -1,0 +1,10 @@
+{
+  "url": "https://opencooking.ru/",
+  "title": "Рецепты",
+  "description": "Рецепты и ничего лишнего.",
+  "feed": {
+    "filename": "index.xml",
+    "path": "/index.xml",
+    "id": "https://opencooking.ru/"
+  }
+}

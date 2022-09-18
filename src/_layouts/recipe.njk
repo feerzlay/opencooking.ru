@@ -1,0 +1,73 @@
+---
+layout: layout.njk
+---
+
+<article itemscope itemtype="http://schema.org/Recipe">
+  <meta itemprop="datePublished" content="{{ page.date.toISOString() }}" />
+
+  <h1 itemprop="name">{{ title }}</h1>
+
+  {% set imagePath %}/images/{{ page.fileSlug }}.webp{% endset %}
+  {% set isImageExists %}{{ imagePath | isFileExists }}{% endset %}
+  {% if isImageExists === "true" %}
+    {% image imagePath, title %}
+  {% endif %}
+
+  <p itemprop="description">
+    {{ description | safe }}
+  </p>
+
+  <ul>
+    <li itemprop="prepTime" content="{{ prepTime }}">
+      Время подготовки — {{ prepTime | duration }}
+    </li>
+    <li itemprop="cookTime" content="{{ cookTime }}">
+      Время приготовления — {{ cookTime | duration }}
+    </li>
+    {% if servings %}
+      <li itemprop="recipeYield" >
+        Количество порций — {{ servings }}
+      </li>
+    {% endif %}
+  </ul>
+
+  <h2>Ингредиенты</h2>
+
+  <ul>
+    {% for ingredient in ingredients %}
+      <li itemprop="recipeIngredient">{{ ingredient.title }} — {{ ingredient.value }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Приготовление</h2>
+
+  <div itemprop="recipeInstructions">
+    {{ content | safe }}
+  </div>
+
+  <div class="noprint">
+    {% if authors %}
+      <h2>Авторы</h2>
+
+      <ul class="list">
+        {% for author in authors %}
+          <li>
+            {% set authorUrl %}/authors/{{ author | slugify }}/{% endset %}
+            <a itemprop="author" content="{{ author }}" href="{{ authorUrl | url }}">{{ author }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <h2>Категории</h2>
+
+    <ul class="list">
+      {% for tag in tags | filterTagList %}
+        <li>
+          {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+          <a itemprop="keywords" content="{{ tag }}" href="{{ tagUrl | url }}">{{ tag }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</article>
