@@ -4,7 +4,13 @@
   "description": "",
   "scripts": {
     "start": "rimraf ./out && npx @11ty/eleventy --serve",
-    "build": "rimraf ./out && cross-env NODE_ENV=production npx @11ty/eleventy"
+    "build": "rimraf ./out && cross-env NODE_ENV=production npx @11ty/eleventy",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint:eslint": "eslint .",
+    "lint:stylelint": "stylelint 'src/**/*.css'",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "husky": "husky install"
   },
   "repository": {
     "type": "git",
@@ -17,9 +23,12 @@
   },
   "homepage": "https://github.com/feerzlay/opencooking#readme",
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "stylelint": "^14.10.0",
     "stylelint-config-prettier": "^9.0.3",
