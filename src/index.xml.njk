@@ -22,9 +22,11 @@ layout: null
 			<updated>{{ recipe.date | rssDate }}</updated>
 			<content type="html">
 				&lt;ul&gt;
-					&lt;li&gt;
-						Время подготовки — {{ recipe.data.prepTime | duration }}
-					&lt;/li&gt;
+					{% if recipe.data.prepTime %}
+						&lt;li&gt;
+							Время подготовки — {{ recipe.data.prepTime | duration }}
+						&lt;/li&gt;
+					{% endif %}
 					&lt;li&gt;
 						Время приготовления — {{ recipe.data.cookTime | duration }}
 					&lt;/li&gt;

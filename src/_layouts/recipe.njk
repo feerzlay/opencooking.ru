@@ -18,9 +18,11 @@ layout: layout.njk
   </p>
 
   <ul>
-    <li itemprop="prepTime" content="{{ prepTime }}">
-      Время подготовки — {{ prepTime | duration }}
-    </li>
+    {% if prepTime %}
+      <li itemprop="prepTime" content="{{ prepTime }}">
+        Время подготовки — {{ prepTime | duration }}
+      </li>
+    {% endif %}
     <li itemprop="cookTime" content="{{ cookTime }}">
       Время приготовления — {{ cookTime | duration }}
     </li>
